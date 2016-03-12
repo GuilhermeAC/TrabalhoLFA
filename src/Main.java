@@ -7,7 +7,7 @@ public class Main {
 		System.out.println(args[0]);
 		System.out.print("Palavra de Entrada: ");
 		System.out.println(args[1]);
-		System.out.print("Arquivo de Saída: ");
+		System.out.print("Arquivo de Saida: ");
 		System.out.println(args[2]);
 
 	
