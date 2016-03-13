@@ -3,4 +3,4 @@ T -> XB
 X -> AT
 X -> AB
 A -> a
-B -> b
+B -> b
