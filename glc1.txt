@@ -1,0 +1,5 @@
+S -> XY
+T -> ZT | a
+X -> TY
+Y -> YT | b
+Z -> TZ | b
