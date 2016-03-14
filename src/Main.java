@@ -1,5 +1,4 @@
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +44,8 @@ public class Main {
 			
 	        cyk ();
 	        padronizar ();
-	        imprimir ();	        
+	        imprimir ();
+	        writeFile ();
         
 		}
 		
@@ -322,6 +322,7 @@ public class Main {
 	
 	public static void imprimir () {
 		
+		
 		int tam = palavra.length();
 		int i, j;
 		
@@ -329,12 +330,11 @@ public class Main {
 		int coluna = tam;
       
 		int limite = coluna;
-		
+					
         for (i=0; i<linha; i++) {
             for (j=0; j<limite; j++) {
-            		System.out.print(mat[i][j] + "\t");
+            	System.out.print(mat[i][j] + "\t");
             }
-            
             // Na segunda linha, o limite não diminui 
             // Pois ela tem a mesma quantidade de colunas da primeira linha
             if (i != 0) {
@@ -342,8 +342,38 @@ public class Main {
             }            
 
             System.out.println();
+        }     
+	        		
+	       
+	}
+	
+	public static void writeFile () {		
+		try {
+			int tam = palavra.length();
+			int i, j;
+			
+			int linha = tam+1;      
+			//limite comeca em 1 pois se deve imprimir apenas 1 elemento no comeco do loop e ir aumentando
+			int limite = 1;
+			
+		    PrintWriter escrita = new PrintWriter (arqsaida);
+						
+	        for (i=linha-1; i>=0; i--) {
+	            for (j=0; j<limite; j++) {
+	            	escrita.write(mat[i][j] + "\t");
+	            }
+	            escrita.write("\n");
+	            // Na penultima linha, o limite não aumenta
+	            // Pois ela tem a mesma quantidade de colunas da primeira linha
+	            if (i > 1) {
+	            	limite++;
+	            }
+	        }	        
+	        escrita.close();
+		}
+        catch(FileNotFoundException e) {
+            System.err.println("Arquivo de saida nao encontrado.");
         }
-        
 	}
 
 } // Fim da classe Main
