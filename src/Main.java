@@ -26,21 +26,26 @@ public class Main {
 			arqsaida = args[2]; // Arquivo de Saída
 			regrasGLC = new HashMap<String, List<String>>(); // HashMap de List de String
 			
-			// TALVEZ SEJA BOM VERIFICAR SE O ARQUIVO EXISTE
-			leitura ();    
+			leitura ();    			
 			
+			/*
 			
 			// Imprimi o HashMap de List 
+			
 	        for (Map.Entry<String, List<String>> entry : regrasGLC.entrySet()) {
 	            String key = entry.getKey();
 	            List<String> values = entry.getValue();
 	            System.out.print(key + " = ");
 	            System.out.println(values);
 	        }
-	        
-	        
+	        	        
 	        System.out.println();
+	        
+	        */
+			
 	        cyk ();
+	        padronizar ();
+	        imprimir ();	        
         
 		}
 		
@@ -48,7 +53,6 @@ public class Main {
 			System.out.println("Argumentos Inválidos");
 		}
 	
-
 	}
 	
 	
@@ -131,33 +135,10 @@ public class Main {
 	        	// E o resto preenche como tudo vazio ""
 	        	else {
 	        		mat[i][j] = "";
-	        	}
-	        	
-	        }
+	        	}	        	
+	        }	        
 		}
-		
-		/*
-        // Percorre e imprimi a matriz "triangular"
-        for (i=0; i<linha; i++) {
-            for (j=0; j<limite; j++) {
-            	if (mat[i][j].equals("")) {
-            		System.out.print("-" + "\t");
-            	}
-            	else {
-            		System.out.print(mat[i][j] + "\t");
-            	}
-            }
-            
-            // Na segunda linha, o limite não diminui 
-            // Pois ela tem a mesma quantidade de colunas da primeira linha
-            if (i != 0) {
-            	limite--;
-            }            
-
-            System.out.println();
-        }
-        */
-                
+		                
         limite = coluna;
         
         int k;
@@ -203,6 +184,7 @@ public class Main {
 	                    	}
 	                    	
 	                    }
+	                    
 	                }
             		
             	}
@@ -210,8 +192,7 @@ public class Main {
             	// A partir da linha 2, será entrado nesse else para realizar as comparações
             	
             	else {
-            		
-            	
+            		            	
 	            	// Percorre todas as linhas anteriores para fazer as comparações
 	            	
         			// Aqui eu percorro uma coluna e uma diagonal ao mesmo tempo
@@ -247,7 +228,7 @@ public class Main {
             		                    // Então pego a lista do HashMap de AT e insiro todos os elementos
             		                    // Da lista (que no caso são as variáveis que deviram AT) 
             		                    // Na posição da matriz [i][j]
-            	                    	for(x=0; x<lista.size(); x++) {
+            	                    	for (x=0; x<lista.size(); x++) {
             	                    		
             	                    		int contador = 0;
             	                    		
@@ -290,14 +271,68 @@ public class Main {
         
         limite = coluna;
         
+	}	
+	
+	// Método para padronizar a matriz com as {} e vírgulas
+	
+	public static void padronizar () {
+	
+		int tam = palavra.length();
+		int i, j, k;
+		
+		int linha = tam+1;
+		int coluna = tam;
+      
+		int limite = coluna;
+		
+        for (i=1; i<linha; i++) {
+            for (j=0; j<limite; j++) {
+            	
+            	// Caso contenha apenas uma ou nenhuma varíavel, colocamos {VARIAVEL} ou {}          	
+            	if (mat[i][j].length() <= 1) {
+            		mat[i][j] = "{" + mat[i][j] + "}";
+            	}
+            	
+            	// Caso haja mais de uma variável, colocamos as vírgulas
+            	else {
+            		
+            		String auxiliar = "";
+            		
+            		for (k=0; k<mat[i][j].length()-1; k++) {
+            			auxiliar = auxiliar + mat[i][j].charAt(k) + ",";
+            		}
+
+            		// E por fim, padronizamos para {VARIAVEl,VARIAVEL,VARIAVEL}
+            		auxiliar = "{" + auxiliar + mat[i][j].charAt(k) + "}";
+            		mat[i][j] = auxiliar;
+            	}
+            	
+            }
+            
+            // Na segunda linha, o limite não diminui 
+            // Pois ela tem a mesma quantidade de colunas da primeira linha
+            if (i != 0) {
+            	limite--;
+            }            
+
+        }
+		
+		
+	}
+	
+	public static void imprimir () {
+		
+		int tam = palavra.length();
+		int i, j;
+		
+		int linha = tam+1;
+		int coluna = tam;
+      
+		int limite = coluna;
+		
         for (i=0; i<linha; i++) {
             for (j=0; j<limite; j++) {
-            	if (mat[i][j].equals("")) {
-            		System.out.print("-" + "\t");
-            	}
-            	else {
             		System.out.print(mat[i][j] + "\t");
-            	}
             }
             
             // Na segunda linha, o limite não diminui 
@@ -308,8 +343,7 @@ public class Main {
 
             System.out.println();
         }
-
         
-	}	// Fim do método cyk
+	}
 
 } // Fim da classe Main
